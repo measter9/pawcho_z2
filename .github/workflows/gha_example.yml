@@ -58,10 +58,10 @@ jobs:
 
       - name: Analyze for critical and high CVEs
         id: docker-scout-cves
-        if: ${{ github.event_name != 'pull_request_target' }}
         uses: docker/scout-action@v1
         with:
           command: cves
           image: d4sk/ts3:zad2
           sarif-file: sarif.output.json
+          only-severities: critical,high
           summary: true
