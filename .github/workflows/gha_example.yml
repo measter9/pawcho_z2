@@ -63,12 +63,12 @@ jobs:
         with:
           command: cves
           image: d4sk/ts3:zad2
-          sarif-file: sarif.output.json
+          sarif-file: cves
           only-severities: critical,high
           summary: true
 
       - name: Test
-        if: steps.docker-scout-cves.outputs
+        if: steps.docker-scout-cves.outputs.cves
         run: |
               echo "here"
       
