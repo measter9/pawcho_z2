@@ -49,11 +49,11 @@ jobs:
           context: .
           file: ./Dockerfile
           platforms: linux/amd64,linux/arm64
-          push: false
+          push: true
           cache-from: |
-            type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/example:cache 
+            type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/ts3:cache 
           cache-to: |
-            type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/example:cache  
+            type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/ts3:cache  
           tags: d4sk/ts3:zad2
 
       - name: Analyze for critical and high CVEs
