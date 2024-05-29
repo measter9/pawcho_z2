@@ -69,11 +69,8 @@ jobs:
           only-severities: critical,high
           summary: true
 
-      - name: Test
-        # if: steps.docker-scout-cves.outputs.cves.runs.result == ''
-        if: ${{fromJson(steps.docker-scout-cves.outputs.cves).runs.result}} == ''
-        run: |
-              echo "here"
+      - name: Log CVE output
+        run: echo "${{ steps.docker-scout-cves.outputs.cves }}"
       
           
       # - 
