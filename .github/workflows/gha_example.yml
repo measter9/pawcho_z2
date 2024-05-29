@@ -56,8 +56,7 @@ jobs:
             type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/example:cache  
           tags: ${{ steps.meta.outputs.tags }}
 
-      - 
-       name: Analyze for critical and high CVEs
+      - name: Analyze for critical and high CVEs
         id: docker-scout-cves
         if: ${{ github.event_name != 'pull_request_target' }}
         uses: docker/scout-action@v1
