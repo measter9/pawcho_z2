@@ -62,7 +62,7 @@ jobs:
         
         with:
           command: cves
-          image: d4sk/ts3:zad2
+          image: d4sk/labtest:weather
           sarif-file: cves
           only-severities: critical,high
           summary: true
