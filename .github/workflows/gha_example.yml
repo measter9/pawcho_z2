@@ -54,7 +54,7 @@ jobs:
             type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/example:cache 
           cache-to: |
             type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/example:cache  
-          tags: local
+          tags: d4sk/ts3:zad2
 
       - name: Analyze for critical and high CVEs
         id: docker-scout-cves
@@ -62,6 +62,6 @@ jobs:
         uses: docker/scout-action@v1
         with:
           command: cves
-          image: local
+          image: d4sk/ts3:zad2
           sarif-file: sarif.output.json
           summary: true
