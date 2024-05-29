@@ -68,7 +68,7 @@ jobs:
           summary: true
 
       - name: Test
-        if: steps.docker-scout-cves.outputs.cves.runs.result
+        if: steps.docker-scout-cves.outputs.cves.runs.result == ''
         run: |
               echo "here"
       
