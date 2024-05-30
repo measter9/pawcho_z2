@@ -71,8 +71,8 @@ jobs:
 
       - name: Check scan results
         run: |
-            critical=$(cat scout-reports/${{ vars.DOCKER_USERNAME }}-labtest-weather.json | jq '.critical')
-            high=$(cat scout-reports/${{ vars.DOCKER_USERNAME }}-labtest-weather.json | jq '.high')
+            critical=$(cat scout-reports/${{ vars.DOCKERHUB_USERNAME }}-labtest-weather.json | jq '.critical')
+            high=$(cat scout-reports/${{ vars.DOCKERHUB_USERNAME }}-labtest-weather.json | jq '.high')
             if [ "$critical" -ne 0 ] || [ "$high" -ne 0 ]; then
               echo "Critical or high vulnerabilities found!"
               exit 1
