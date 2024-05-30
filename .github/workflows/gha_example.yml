@@ -59,10 +59,9 @@ jobs:
       - name: Analyze for critical and high CVEs
         id: docker-scout-cves
         uses: docker/scout-action@v1
-        
         with:
           command: cves
-          image: d4sk/labtest:weather
+          image: ${{vars.DOCKERHUB_USERNAME}}/ts3:zad2
           format: sarif
           sarif-file: cves
           output: cves
