@@ -68,26 +68,9 @@ jobs:
           output: cves
           only-severities: critical,high
           summary: true
+          exit-code: true
 
       - name: Check scan results
-        run: |
-            critical=$(cat scout-reports/cves | jq '.critical')
-            high=$(cat scout-reports/cves | jq '.high')
-            if [ "$critical" -ne 0 ] || [ "$high" -ne 0 ]; then
-              echo "Critical or high vulnerabilities found!"
-              exit 1
-            fi
-      # - 
-      #  name: Build and push Docker image
-      #  uses: docker/build-push-action@v5
-      #  if: ${{fromJson(steps.docker-scout-cves.outputs.sarif.output.json).}}
-      #  with:
-      #    context: .
-      #    file: ./Dockerfile
-      #    platforms: linux/amd64,linux/arm64
-      #    push: true
-      #    cache-from: |
-      #      type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/ts3:cache 
-      #    cache-to: |
-      #      type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/ts3:cache  
-      #    tags: d4sk/labtest:zad2
+        if: success()
+        run: echo "here"
+    
