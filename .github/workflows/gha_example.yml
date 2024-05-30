@@ -69,10 +69,14 @@ jobs:
           only-severities: critical,high
           summary: true
 
-      - name: Log CVE output
-        run: echo "${{ steps.docker-scout-cves.outputs.cves }}"
-      
-          
+      - name: Check scan results
+        run: |
+            critical=$(cat scout-reports/${{ vars.DOCKER_USERNAME }}-labtest-weather.json | jq '.critical')
+            high=$(cat scout-reports/${{ vars.DOCKER_USERNAME }}-labtest-weather.json | jq '.high')
+            if [ "$critical" -ne 0 ] || [ "$high" -ne 0 ]; then
+              echo "Critical or high vulnerabilities found!"
+              exit 1
+            fi
       # - 
       #  name: Build and push Docker image
       #  uses: docker/build-push-action@v5
