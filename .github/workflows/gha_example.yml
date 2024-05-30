@@ -43,7 +43,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - 
-        name: Build and push Docker image
+        name: Build and push Docker image to private
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -70,7 +70,17 @@ jobs:
           summary: true
           exit-code: true
 
-      - name: Check scan results
+      - name: Push to public if no vuln found
         if: success()
-        run: echo "here"
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          cache-from: |
+            type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/ts3:cache 
+          cache-to: |
+            type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/ts3:cache  
+          tags: ${{vars.DOCKERHUB_USERNAME}}/labtest:zad2
     
